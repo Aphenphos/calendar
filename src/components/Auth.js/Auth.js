@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { authUser } from '../../services/auth';
 
 export default function Auth() {
   const { type } = useParams();
-  const { setUser } = useContext(UserContext);
+  const { setUser, user } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +15,9 @@ export default function Auth() {
     setUser(userResp);
   };
 
-
+  if (user) {
+    return <Redirect to="/calender" />;
+  }
 
 
   return (
@@ -27,7 +29,7 @@ export default function Auth() {
       </label>
 
       <label>Password
-        <input onChange={(e) => {
+        <input type="password" onChange={(e) => {
           setPassword(e.target.value);
         }} />
       </label>
