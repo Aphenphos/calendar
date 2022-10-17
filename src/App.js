@@ -13,8 +13,8 @@ function App() {
 
       <Switch>
         <Route path="/auth/:type" component={Auth} />
-        <Route path="/" component={Calendar} />
         <Route path="/profile" component={Profile} />
+        <Route path="/" component={Calendar} />
       </Switch>
 
       <Footer />

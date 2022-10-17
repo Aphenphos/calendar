@@ -11,33 +11,46 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-    
-  const submitAuth = async () => {
+  const submitAuth = async (e) => {
+    e.preventDefault();
     const userResp = await authUser(email, password, type);
     setUser(userResp);
   };
-  
+
   if (user) {
     return <Redirect to="/" />;
   }
-  
 
   return (
-    <div className='container'>
-      <form className='input-form'>
-        <label>Email:
-          <input className='email-input' type="email" onChange={(e) => {
-            setEmail(e.target.value);
-          }} />
+    <div className="container">
+      <form className="input-form">
+        <label>
+          Email:
+          <input
+            className="email-input"
+            type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
         </label>
 
-        <label>Password:
-          <input className='password-input' type="password" onChange={(e) => {
-            setPassword(e.target.value);
-          }} />
+        <label>
+          Password:
+          <input
+            className="password-input"
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </label>
-        <span>need an account? <Link to="/auth/sign-up">Sign up!</Link></span>
-        <button className='submit-button' onClick={submitAuth}>Submit</button>
+        <span>
+          need an account? <Link to="/auth/sign-up">Sign up!</Link>
+        </span>
+        <button className="submit-button" onClick={submitAuth}>
+          Submit
+        </button>
       </form>
     </div>
   );
