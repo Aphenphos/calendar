@@ -14,7 +14,7 @@ export default function Calender() {
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
-
+ 
   return (
     <>
       <div id="month-container">
@@ -27,6 +27,7 @@ export default function Calender() {
         <div>Saturday</div>
         {days.map((day, index) => (
           <Day key={index} day={day} />
+          
         ))}
       </div>
     </>

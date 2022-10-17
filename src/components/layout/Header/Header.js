@@ -15,15 +15,15 @@ export default function Header() {
   return (
     <div className="Header">
       <div className="middle-header">
-        <div className="img-container">
-          <h1>Hello!</h1>
-        </div>
-        <Link to="/profile">Profile Page</Link>
+        <h1>Calendar</h1>
         {user && (
           <Link to="/auth/sign-in" className="nav-link">
             <p onClick={handleSignOut}>Logout</p>
           </Link>
         )}
+        <Link className="profile-link" to="/profile">
+          Profile Page
+        </Link>
       </div>
     </div>
   );

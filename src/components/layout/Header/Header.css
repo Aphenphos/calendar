@@ -11,3 +11,25 @@
   font-family: 'Libre Baskerville', serif;
   color: white;
 }
+
+.middle-header {   
+  color: black;
+  height: 6vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 1500px;
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(196,196,196,1) 38%, rgba(142,142,142,1) 100%);
+  justify-content: space-around;
+}
+
+.nav-link {
+  text-decoration: none;
+  
+}
+.profile-link {
+  text-decoration: none;
+}
+
