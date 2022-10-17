@@ -14,8 +14,8 @@ function App() {
       <Switch>
         <Route path="/calender" component={Calender} />
         <Route path="/auth/:type" component={Auth} />
-        <Route path="/" component={Auth}/>
         <Route path='/profile' component={Profile} />
+        <Route path="/" component={Auth}/>
       </Switch>
 
       <Footer />
