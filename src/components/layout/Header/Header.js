@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <div className="Header">
       <div className="middle-header">
-        <h1>Calendar</h1>
+        <Link to='/calendar'><h1>Calendar</h1></Link>
         {user && (
           <Link to="/auth/sign-in" className="nav-link">
             <p onClick={handleSignOut}>Logout</p>

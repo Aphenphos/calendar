@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { getProfileData, updateProfile } from '../../services/auth';
 import { UserContext } from '../../context/useUser';
+import './profiles.css';
 
 export default function Profile() {
   const [profile, setProfile] = useState([]);
@@ -27,14 +28,14 @@ export default function Profile() {
   };
 
   return (
-    <>
-      <h1>Profile Page</h1>
+    <div className='profile-page'>
       <div>
         <h3>{profile.profile_name}</h3>
         <form onSubmit={updateProf}>
           <input
             type="text"
             name="username"
+            placeholder='enter profile name'
             onChange={(e) => {
               setUserName(e.target.value);
             }}
@@ -42,6 +43,6 @@ export default function Profile() {
           <button> Submit </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
