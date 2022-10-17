@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer/Footer';
 import Header from './components/layout/Header/Header';
 import Calendar from './components/Calendar/Calendar';
 import Profile from './components/Profile/Profiles';
+import CreateCalendar from './CreateCalendar/CreateCalendar';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
 
       <Switch>
         <Route path="/auth/:type" component={Auth} />
+        <Route path="/create-calendar" component={CreateCalendar}></Route>
         <Route path="/profile" component={Profile} />
         <Route path="/" component={Calendar} />
       </Switch>
