@@ -26,7 +26,7 @@ export async function getProfileData() {
   return checkError(response);
 }
 
-export async function updateProfile(profile, id) {
+export async function updateProfile(profile) {
   const response = await client.from('user-profiles').upsert(profile).single();
   return response.data;
 }

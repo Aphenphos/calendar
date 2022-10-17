@@ -9,3 +9,8 @@ export async function getCalendars() {
     .eq('user1, user2, user3', profile.profile_name);
   return checkError(response);
 }
+
+export async function updateCalendar(calendar) {
+  const response = await client.from('owners').upsert(calendar).single();
+  return response.data;
+}
