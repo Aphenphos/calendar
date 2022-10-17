@@ -1,4 +1,4 @@
-import { client } from './client';
+import { client, checkError } from './client';
 
 export function getUser() {
   return client.auth.currentUser;
@@ -17,4 +17,12 @@ export async function authUser(email, password, type) {
 
 export async function signOut() {
   await client.auth.signOut();
+}
+
+export async function getProfileData() {
+  const response = await client
+    .from('user-profiles')
+    .select('*');
+    
+  return checkError(response);
 }

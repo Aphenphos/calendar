@@ -17,11 +17,9 @@ export default function Header() {
     <div className='Header'>
       <div className='middle-header'>
         <div className='img-container'>
-          <h1>Hello!</h1>
-         
-
-          
+          <h1>Hello!</h1>         
         </div>
+        <Link to='/profile'>Profile Page</Link>
         {user && (
           <Link to="/auth/sign-in" className="nav-link">
             <p onClick={handleSignOut}>Logout</p>
