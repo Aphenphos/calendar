@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { signOut } from '../../../services/auth';
 import { UserContext } from '../../context/useUser';
 import { Link } from 'react-router-dom';
+import './Header.css';
+
 
 export default function Header() {
   const { user, setUser } = useContext(UserContext);
@@ -12,14 +14,20 @@ export default function Header() {
   };
     
   return (
-    <div>Header
-          
-      {user && (
-        <Link to="/auth/sign-in" className="nav-link">
-          <p onClick={handleSignOut}>Logout</p>
-        </Link>
-      )}
+    <div className='Header'>
+      <div className='middle-header'>
+        <div className='img-container'>
+          <h1>Hello!</h1>
+         
 
+          
+        </div>
+        {user && (
+          <Link to="/auth/sign-in" className="nav-link">
+            <p onClick={handleSignOut}>Logout</p>
+          </Link>
+        )}
+      </div>
     </div>
       
   );
