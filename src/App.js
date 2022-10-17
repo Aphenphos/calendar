@@ -4,6 +4,7 @@ import Auth from './components/Auth.js/Auth';
 import Footer from './components/layout/Footer/Footer';
 import Header from './components/layout/Header/Header';
 import Calendar from './components/Calendar/Calendar';
+import Profile from './components/Profile/Profiles';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route path="/auth/:type" component={Auth} />
         <Route path="/" component={Calendar} />
+        <Route path="/profile" component={Profile} />
       </Switch>
 
       <Footer />
