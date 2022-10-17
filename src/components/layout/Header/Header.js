@@ -21,6 +21,12 @@ export default function Header() {
             <p onClick={handleSignOut}>Logout</p>
           </Link>
         )}
+        <Link className="profile-link" to="/">
+          Home
+        </Link>
+        <Link className="profile-link" to="/create-calendar">
+          Make a new Calendar
+        </Link>
         <Link className="profile-link" to="/profile">
           Profile Page
         </Link>
@@ -28,3 +34,5 @@ export default function Header() {
     </div>
   );
 }
+
+
