@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import { getProfileData, updateProfile } from '../../services/auth';
-import { UserContext } from '../context/useUser';
+import { UserContext } from '../../context/useUser';
 
 export default function Profile() {
   const [profile, setProfile] = useState([]);
