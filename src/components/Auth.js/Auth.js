@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { authUser } from '../../services/auth';
+import { Link } from 'react-router-dom';
+import './Auth.css';
 
 export default function Auth() {
   const { type } = useParams();
@@ -14,28 +16,29 @@ export default function Auth() {
     const userResp = await authUser(email, password, type);
     setUser(userResp);
   };
-
+  
   if (user) {
-    return <Redirect to="/calender" />;
+    return <Redirect to="/" />;
   }
-
+  
 
   return (
     <div className='container'>
-      <label>Email
-        <input onChange={(e) => {
-          setEmail(e.target.value);
-        }} />
-      </label>
+      <form className='input-form'>
+        <label>Email:
+          <input className='email-input' type="email" onChange={(e) => {
+            setEmail(e.target.value);
+          }} />
+        </label>
 
-      <label>Password
-        <input type="password" onChange={(e) => {
-          setPassword(e.target.value);
-        }} />
-      </label>
-          
-      <button onClick={submitAuth}>Submit</button>
-          
+        <label>Password:
+          <input className='password-input' type="password" onChange={(e) => {
+            setPassword(e.target.value);
+          }} />
+        </label>
+        <span>need an account? <Link to="/auth/sign-up">Sign up!</Link></span>
+        <button className='submit-button' onClick={submitAuth}>Submit</button>
+      </form>
     </div>
   );
 }

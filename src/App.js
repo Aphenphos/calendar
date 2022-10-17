@@ -11,7 +11,6 @@ function App() {
       <Header />
 
       <Switch>
-        <Route path="/calender" component={Calender} />
         <Route path="/auth/:type" component={Auth} />
         <Route path="/" component={Auth}/>
       </Switch>
