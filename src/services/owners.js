@@ -7,7 +7,7 @@ export async function getAccess() {
   return response.data;
 }
 
-export async function getCalendars(id) {
+export async function getCalendarById(id) {
   const resp = await client.from('calendars').select('*').eq('id', id);
   return resp.data;
 }
@@ -19,7 +19,7 @@ export async function getOwnedCalendars() {
   return resp.data;
 }
 
-export async function getCalendar(name, owner) {
+export async function getCalendarByName(name, owner) {
   const response = await client
     .from('calendars')
     .select('*')

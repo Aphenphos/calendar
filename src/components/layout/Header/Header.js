@@ -6,38 +6,31 @@ import './Header.css';
 import { useCalendars } from '../../../hooks/useCalendars';
 
 export default function Header() {
-  const [select, setSelected] = useState('');
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setProfile } = useContext(UserContext);
   const { calendars } = useCalendars();
   console.log(calendars);
 
   const handleSignOut = async () => {
     await signOut();
     setUser(null);
+    setProfile(null);
   };
 
   return (
     <div className="Header">
-      <select onChange={(e) => setSelected(e.target.value)}>
-        {calendars.map((cal) => (
-          <option key={cal.id} value={cal.id}>
-            {cal.name}
-          </option>
-        ))}
-      </select>
       <div className="middle-header">
-        <h1>Calendar</h1>
+        <h1>YouCal</h1>
         <Link className="profile-link" to="/">
           Home
         </Link>
         <Link className="profile-link" to="/create-event">
-          Make Event
+          Events
         </Link>
         <Link className="profile-link" to="/create-calendar">
-          Make a new Calendar
+          Customize and Create
         </Link>
         <Link className="profile-link" to="/profile">
-          Profile Page
+          Profile
         </Link>
         {user && (
           <Link to="/auth/sign-in" className="nav-link">

@@ -1,12 +1,18 @@
 import { createContext, useState } from 'react';
-import { getUser } from '../services/auth';
+import { getProfileData, getUser } from '../services/auth';
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const currentUser = getUser();
+  const currentProfile = getProfileData();
   const [user, setUser] = useState(currentUser);
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  const [profile, setProfile] = useState(currentProfile);
+  return (
+    <UserContext.Provider value={{ user, setUser, profile, setProfile }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export { UserContext, UserProvider };

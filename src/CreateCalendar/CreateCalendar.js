@@ -3,7 +3,12 @@ import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { useOwned } from '../hooks/useOwned';
 import { getProfileData } from '../services/auth';
-import { getCalendar, getUserByUserName, updateCalendar, updateUser } from '../services/owners';
+import {
+  getCalendarByName,
+  getUserByUserName,
+  updateCalendar,
+  updateUser,
+} from '../services/owners';
 
 export default function CreateCalendar() {
   const [selected, setSelected] = useState('');
@@ -29,7 +34,7 @@ export default function CreateCalendar() {
     e.preventDefault();
     let newCal = {};
     const profile = await getProfileData();
-    let cur = getCalendar(calendarName, profile.id);
+    let cur = await getCalendarByName(calendarName, profile.id);
     if (cur !== null) {
       newCal = {
         id: cur.id,
@@ -43,7 +48,7 @@ export default function CreateCalendar() {
       };
     }
     await updateCalendar(newCal);
-    const newC = await getCalendar(calendarName, profile.id);
+    const newC = await getCalendarByName(calendarName, profile.id);
     const updatedUser = {
       cal_id: newC.id,
       owner_id: profile.id,

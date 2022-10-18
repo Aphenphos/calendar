@@ -4,18 +4,29 @@ import { Redirect } from 'react-router-dom';
 import { useMonth } from '../../hooks/useMonth';
 import Day from '../Day/Day';
 import './Calendar.sass';
+import { useCalendars } from '../../hooks/useCalendars';
 
 export default function Calender() {
   const [year, setYear] = useState(2022);
   const [month, setMonth] = useState(11);
   const { user } = useContext(UserContext);
   const { days, setDays } = useMonth(year, month);
+  const { calendars } = useCalendars();
+  const [selected, setSelected] = useState();
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
 
   return (
     <>
+      <select onChange={(e) => setSelected(e.target.value)}>
+        <option defaultValue={null}>pick to edit</option>
+        {calendars.map((cal) => (
+          <option key={cal.id} value={cal.id}>
+            {cal.name}
+          </option>
+        ))}
+      </select>
       <div id="month-container">
         <div>Sunday</div>
         <div>Monday</div>

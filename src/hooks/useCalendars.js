@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAccess, getCalendars } from '../services/owners';
+import { getAccess, getCalendarById } from '../services/owners';
 
 export function useCalendars() {
   const [calendars, setCalendars] = useState([]);
@@ -12,7 +12,7 @@ export function useCalendars() {
       }
       let data = [];
       for (let i = 0; i < getAccessible.length; i++) {
-        data.push(await getCalendars(getAccessible[i]));
+        data.push(await getCalendarById(getAccessible[i]));
       }
       let arr = [];
       for (let i = 0; i < data.length; i++) {
