@@ -3,9 +3,11 @@ import { signOut } from '../../../services/auth';
 import { UserContext } from '../../../context/useUser';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import { useCalendars } from '../../../hooks/useCalendars';
 
 export default function Header() {
   const { user, setUser } = useContext(UserContext);
+  const { calendars } = useCalendars();
 
   const handleSignOut = async () => {
     await signOut();
@@ -14,6 +16,11 @@ export default function Header() {
 
   return (
     <div className="Header">
+      <select>
+        {calendars.map((cal) => (
+          <option key={cal.id}>{cal.name}</option>
+        ))}
+      </select>
       <div className="middle-header">
         <h1>Calendar</h1>
         {user && (
@@ -34,5 +41,3 @@ export default function Header() {
     </div>
   );
 }
-
-

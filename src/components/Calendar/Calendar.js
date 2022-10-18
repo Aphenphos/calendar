@@ -10,7 +10,6 @@ export default function Calender() {
   const [month, setMonth] = useState(11);
   const { user } = useContext(UserContext);
   const { days, setDays } = useMonth(year, month);
-
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }

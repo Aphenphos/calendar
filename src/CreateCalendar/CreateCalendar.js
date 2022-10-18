@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { getProfileData } from '../services/auth';
-import { getCalendar, getUserByUserName, updateCalendar } from '../services/owners';
+import { getCalendar, getCalendars, getUserByUserName, updateCalendar } from '../services/owners';
 
 export default function CreateCalendar() {
   const [calendarName, setCalendarName] = useState('');

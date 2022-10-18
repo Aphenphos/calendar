@@ -2,12 +2,9 @@ import { getProfileData } from './auth';
 import { checkError, client } from './client';
 
 export async function getCalendars() {
-  const profile = getProfileData();
-  const response = await client
-    .from('owners')
-    .select('*')
-    .eq('user1, user2, user3', profile.profile_name);
-  return checkError(response);
+  const profile = await getProfileData();
+  const response = await client.from('owners').select('*').eq('user1', profile.id);
+  return response.data;
 }
 
 export async function getCalendar(name, user1) {
@@ -17,7 +14,6 @@ export async function getCalendar(name, user1) {
     .eq('name', name)
     .eq('user1', user1)
     .single();
-  console.log(response.data);
   return response.data;
 }
 export async function updateCalendar(calendar) {
