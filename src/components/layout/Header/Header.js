@@ -23,13 +23,11 @@ export default function Header() {
       </select>
       <div className="middle-header">
         <h1>Calendar</h1>
-        {user && (
-          <Link to="/auth/sign-in" className="nav-link">
-            <p onClick={handleSignOut}>Logout</p>
-          </Link>
-        )}
         <Link className="profile-link" to="/">
           Home
+        </Link>
+        <Link className="profile-link" to="/create-event">
+          Make Event
         </Link>
         <Link className="profile-link" to="/create-calendar">
           Make a new Calendar
@@ -37,6 +35,11 @@ export default function Header() {
         <Link className="profile-link" to="/profile">
           Profile Page
         </Link>
+        {user && (
+          <Link to="/auth/sign-in" className="nav-link">
+            <p onClick={handleSignOut}>Logout</p>
+          </Link>
+        )}
       </div>
     </div>
   );
