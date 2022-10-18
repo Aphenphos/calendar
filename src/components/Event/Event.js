@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { CalendarContext } from '../../context/useCalendar';
+
 import { UserContext } from '../../context/useUser';
 import './Event.css';
 import DatePicker from 'react-date-picker';
