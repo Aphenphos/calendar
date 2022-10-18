@@ -1,6 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+import { client, checkError } from './client';
 
-// export async function updateCalendar(calendar) {
-//   const response = await client.from('calendar-events').upsert(calendar).single();
-//   return response.data;
-// }
+export async function addDate(dateArr) {
+  const response = await client.from('calendar-events').upsert(dateArr);
+  return response.data;
+}

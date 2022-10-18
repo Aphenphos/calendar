@@ -51,7 +51,7 @@ export default function CreateCalendar() {
     await updateUser(updatedUser);
     window.location.replace('/');
   };
-
+  
   return (
     <>
       <select onChange={(e) => setSelected(e.target.value)}>
