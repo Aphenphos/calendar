@@ -3,7 +3,7 @@ import { checkError, client } from './client';
 
 export async function getCalendars() {
   const profile = await getProfileData();
-  const response = await client.from('calendars').select('*').eq('owner', profile.id);
+  const response = await client.from('owners').select('*').eq('owner_id', profile.id);
   return response.data;
 }
 
