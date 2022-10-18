@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { useOwned } from '../hooks/useOwned';
+import { useUsers } from '../hooks/useUsers';
 import { getProfileData } from '../services/auth';
 import {
   getCalendarByName,
@@ -16,6 +17,8 @@ export default function CreateCalendar() {
   const [newUser, setNewUser] = useState('');
   const { user } = useContext(UserContext);
   const { calendars } = useOwned();
+  const { users } = useUsers();
+  console.log(users);
 
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
@@ -56,7 +59,7 @@ export default function CreateCalendar() {
     await updateUser(updatedUser);
     window.location.replace('/');
   };
-  
+
   return (
     <>
       <select onChange={(e) => setSelected(e.target.value)}>
@@ -67,6 +70,7 @@ export default function CreateCalendar() {
           </option>
         ))}
       </select>
+
       <form className="create-calender-form" onSubmit={handleSubmit}>
         Name Calendar
         <input
@@ -79,6 +83,7 @@ export default function CreateCalendar() {
         ></input>
         <button>Submit</button>
       </form>
+
       <input
         placeholder="Users Name"
         type="text"
@@ -87,6 +92,8 @@ export default function CreateCalendar() {
         }}
       ></input>
       <button onClick={handleAdd}>Add User</button>
+
+      <div id="users"></div>
     </>
   );
 }

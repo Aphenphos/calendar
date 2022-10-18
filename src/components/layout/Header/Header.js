@@ -8,7 +8,6 @@ import { useCalendars } from '../../../hooks/useCalendars';
 export default function Header() {
   const { user, setUser, setProfile } = useContext(UserContext);
   const { calendars } = useCalendars();
-  console.log(calendars);
 
   const handleSignOut = async () => {
     await signOut();

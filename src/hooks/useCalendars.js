@@ -5,22 +5,19 @@ export function useCalendars() {
   const [calendars, setCalendars] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const getCals = await getAccess();
-      let getAccessible = [];
-      for (let i = 0; i < getCals.length; i++) {
-        getAccessible.push(getCals[i].cal_id);
-      }
-      let data = [];
-      for (let i = 0; i < getAccessible.length; i++) {
-        data.push(await getCalendarById(getAccessible[i]));
-      }
+      const data = await getAccess();
       let arr = [];
       for (let i = 0; i < data.length; i++) {
         arr.push({
-          id: data[i][0].id,
-          name: data[i][0].name,
+          id: data[i].id,
+          cal_id: data[i].cal_id,
+          owner_id: data[i].owner_id,
+          calId: data[i].calendars.id,
+          calName: data[i].calendars.name,
+          calOwner: data[i].calendars.owner,
         });
       }
+      console.log(arr);
       setCalendars(arr);
     };
     fetchData();

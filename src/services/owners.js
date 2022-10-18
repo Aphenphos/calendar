@@ -3,7 +3,21 @@ import { client } from './client';
 
 export async function getAccess() {
   const profile = await getProfileData();
-  const response = await client.from('owners').select('*').eq('owner_id', profile.id);
+  const response = await client
+    .from('owners')
+    .select(
+      `
+  id,
+  cal_id,
+  owner_id,
+  calendars (
+    id,
+    name,
+    owner
+  )
+  `
+    )
+    .eq('owner_id', profile.id);
   return response.data;
 }
 
@@ -41,10 +55,28 @@ export async function updateUser(user) {
 
 export async function getUserByUserName(username) {
   const response = await client
-    .from('user-profiles')
+    .from('user_profiles')
     .select('*')
     .eq('profile_name', username)
     .single();
   if (username === null) return response.data;
   return response.data.id;
+}
+
+export async function getUsers() {
+  const response = await client
+    .from('owners')
+    .select(
+      `
+  id,
+  cal_id,
+  owner_id,
+  user_profiles (
+    profile_name
+  )
+  `
+    )
+    .eq('cal_id', 33);
+  console.log(response.data);
+  return response.data;
 }

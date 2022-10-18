@@ -22,8 +22,8 @@ export default function Calender() {
       <select onChange={(e) => setSelected(e.target.value)}>
         <option defaultValue={null}>pick to edit</option>
         {calendars.map((cal) => (
-          <option key={cal.id} value={cal.id}>
-            {cal.name}
+          <option key={cal.calId} value={cal.id}>
+            {cal.calName}
           </option>
         ))}
       </select>
