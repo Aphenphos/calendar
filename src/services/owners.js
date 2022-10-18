@@ -1,5 +1,5 @@
 import { getProfileData } from './auth';
-import { checkError, client } from './client';
+import { client } from './client';
 
 export async function getAccess() {
   const profile = await getProfileData();
@@ -9,6 +9,12 @@ export async function getAccess() {
 
 export async function getCalendars(id) {
   const resp = await client.from('calendars').select('*').eq('id', id);
+  return resp.data;
+}
+
+export async function getOwnedCalendars() {
+  const profile = await getProfileData();
+  const resp = await client.from('calendars').select('*').eq('owner', profile.id);
   console.log(resp.data);
   return resp.data;
 }
@@ -20,7 +26,7 @@ export async function getCalendar(name, owner) {
     .eq('name', name)
     .eq('owner', owner)
     .single();
-  console.log(response.data);
+
   return response.data;
 }
 export async function updateCalendar(calendar) {

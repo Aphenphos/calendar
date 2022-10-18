@@ -9,6 +9,7 @@ export default function Header() {
   const [select, setSelected] = useState('');
   const { user, setUser } = useContext(UserContext);
   const { calendars } = useCalendars();
+  console.log(calendars);
 
   const handleSignOut = async () => {
     await signOut();

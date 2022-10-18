@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { getProfileData } from '../services/auth';
 import { getAccess, getCalendars } from '../services/owners';
 
 export function useCalendars() {
   const [calendars, setCalendars] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const prof = await getProfileData();
       const getCals = await getAccess();
       let getAccessible = [];
       for (let i = 0; i < getCals.length; i++) {
@@ -23,7 +21,6 @@ export function useCalendars() {
           name: data[i][0].name,
         });
       }
-      console.log(arr);
       setCalendars(arr);
     };
     fetchData();

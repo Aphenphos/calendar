@@ -1,23 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
-import { useCalendars } from '../hooks/useCalendars';
-import { getProfileData, getUser } from '../services/auth';
-import {
-  getCalendar,
-  getCalendars,
-  getUserByUserName,
-  updateCalendar,
-  updateUser,
-} from '../services/owners';
+import { useOwned } from '../hooks/useOwned';
+import { getProfileData } from '../services/auth';
+import { getCalendar, getUserByUserName, updateCalendar, updateUser } from '../services/owners';
 
 export default function CreateCalendar() {
   const [selected, setSelected] = useState('');
   const [calendarName, setCalendarName] = useState('');
   const [newUser, setNewUser] = useState('');
-  const [users, setUsers] = useState([]);
   const { user } = useContext(UserContext);
-  const { calendars } = useCalendars();
+  const { calendars } = useOwned();
 
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
@@ -37,7 +30,6 @@ export default function CreateCalendar() {
     let newCal = {};
     const profile = await getProfileData();
     let cur = getCalendar(calendarName, profile.id);
-    console.log(cur);
     if (cur !== null) {
       newCal = {
         id: cur.id,
