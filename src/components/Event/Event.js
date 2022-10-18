@@ -6,41 +6,34 @@ import './Event.css';
 import DatePicker from 'react-date-picker';
 
 
-
 // import DatePicker from '@mui/x-date-pickers/DatePicker';
 
-
 export default function Event() {
-  // const { user } = useContext(UserContext);
-  // const { calendar } = useContext(CalendarContext);
+  const { user } = useContext(UserContext);
   const [desc, setDisc] = useState('');
-  const [value, onChange] = useState(new Date());
-  // const [date, setDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const selectedDateOption = new Date(selectedDate);
+  const formattedDate = `${selectedDateOption.getMonth() + 1}/${selectedDateOption.getDate()}/${selectedDateOption.getFullYear()}`;
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const dateArr = formattedDate.split('/');
+  console.log(dateArr);
 
-  // if (!user) {const [date, setDate] = useState('');
-  //   return <Redirect to="/auth/sign-in"></Redirect>;
-  // }
+  if (!user) {
+    return <Redirect to="/auth/sign-in"></Redirect>;
+  }
 
-  const handleSubmit = async () => {
-    const newEvent = {
-      
-      description: desc,
-      start: startDate,
-      end: endDate,
-    };
-
-    // addNewEvent(newEvent)
+  const onChanges = selectedDate => {
+    setSelectedDate(selectedDate);
   };
 
+ 
   return (
     <>
       <div>
-        <DatePicker onChange={onChange} value={value} />
-
-        <form onSubmit={handleSubmit}>
+        
+        <DatePicker onChange={onChanges} value={selectedDate} type="text" />
+       
+        <form>
           <input
             placeholder="description"
             onChange={(e) => {
