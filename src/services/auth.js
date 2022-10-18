@@ -21,12 +21,19 @@ export async function signOut() {
 
 export async function getProfileData() {
   const user = getUser();
-  const response = await client.from('user-profiles').select('*').eq('user_id', user.id).single();
+  const response = await client
+    .from('user-profiles')
+    .select('*')
+    .eq('user_id', user.id)
+    .single();
 
   return checkError(response);
 }
 
 export async function updateProfile(profile, id) {
-  const response = await client.from('user-profiles').upsert(profile).single();
+  const response = await client
+    .from('user-profiles')
+    .upsert(profile)
+    .single();
   return response.data;
 }
