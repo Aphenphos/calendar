@@ -1,32 +1,26 @@
 import { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { CalendarContext } from '../../context/useCalendar';
 import { UserContext } from '../../context/useUser';
 import './Event.css';
 import DatePicker from 'react-date-picker';
 
-
-
 // import DatePicker from '@mui/x-date-pickers/DatePicker';
 
-
 export default function Event() {
-  // const { user } = useContext(UserContext);
-  // const { calendar } = useContext(CalendarContext);
+  const { user } = useContext(UserContext);
   const [desc, setDisc] = useState('');
   const [value, onChange] = useState(new Date());
-  // const [date, setDate] = useState('');
+  const [date, setDate] = useState('');
 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  // if (!user) {const [date, setDate] = useState('');
-  //   return <Redirect to="/auth/sign-in"></Redirect>;
-  // }
+  if (!user) {
+    return <Redirect to="/auth/sign-in"></Redirect>;
+  }
 
   const handleSubmit = async () => {
     const newEvent = {
-      
       description: desc,
       start: startDate,
       end: endDate,
