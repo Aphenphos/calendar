@@ -3,21 +3,26 @@ import { checkError, client } from './client';
 
 export async function getCalendars() {
   const profile = await getProfileData();
-  const response = await client.from('owners').select('*').eq('user1', profile.id);
+  const response = await client.from('calendars').select('*').eq('owner', profile.id);
   return response.data;
 }
 
-export async function getCalendar(name, user1) {
+export async function getCalendar(name, owner) {
   const response = await client
-    .from('owners')
+    .from('calendars')
     .select('*')
     .eq('name', name)
-    .eq('user1', user1)
+    .eq('owner', owner)
     .single();
   return response.data;
 }
 export async function updateCalendar(calendar) {
-  const response = await client.from('owners').upsert(calendar).single();
+  const response = await client.from('calendars').upsert(calendar).single();
+  return response.data;
+}
+
+export async function updateUser(user) {
+  const response = await client.from('owners').upsert(user).single();
   return response.data;
 }
 

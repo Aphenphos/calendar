@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { signOut } from '../../../services/auth';
 import { UserContext } from '../../../context/useUser';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import './Header.css';
 import { useCalendars } from '../../../hooks/useCalendars';
 
 export default function Header() {
+  const [select, setSelected] = useState('');
   const { user, setUser } = useContext(UserContext);
   const { calendars } = useCalendars();
 
@@ -16,9 +17,11 @@ export default function Header() {
 
   return (
     <div className="Header">
-      <select>
+      <select onChange={(e) => setSelected(e.target.value)}>
         {calendars.map((cal) => (
-          <option key={cal.id}>{cal.name}</option>
+          <option key={cal.id} value={cal.id}>
+            {cal.name}
+          </option>
         ))}
       </select>
       <div className="middle-header">

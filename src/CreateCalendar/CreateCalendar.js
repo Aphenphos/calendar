@@ -1,69 +1,95 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
-import { getProfileData } from '../services/auth';
-import { getCalendar, getCalendars, getUserByUserName, updateCalendar } from '../services/owners';
+import { useCalendars } from '../hooks/useCalendars';
+import { getProfileData, getUser } from '../services/auth';
+import {
+  getCalendar,
+  getCalendars,
+  getUserByUserName,
+  updateCalendar,
+  updateUser,
+} from '../services/owners';
 
 export default function CreateCalendar() {
+  const [selected, setSelected] = useState('');
   const [calendarName, setCalendarName] = useState('');
-  const [firstUser, setFirstUser] = useState(null);
-  const [secondUser, setSecondUser] = useState(null);
+  const [newUser, setNewUser] = useState('');
+  const [users, setUsers] = useState([]);
   const { user } = useContext(UserContext);
+  const { calendars } = useCalendars();
 
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
-
+  //add users to an existing calendar
+  const handleAdd = async () => {
+    const usersId = await getUserByUserName(newUser);
+    const user = {
+      owner_id: usersId,
+      cal_id: selected,
+    };
+    updateUser(user);
+  };
+  //for submitting a NEW calendar
   const handleSubmit = async (e) => {
-    let newUsers = {};
     e.preventDefault();
+    let newCal = {};
     const profile = await getProfileData();
-    const cur = await getCalendar(calendarName, profile.id);
-    if (cur === null) {
-      newUsers = {
-        name: calendarName,
-        user1: profile.id,
-        user2: await getUserByUserName(firstUser),
-        user3: await getUserByUserName(secondUser),
-      };
-      await updateCalendar(newUsers);
-    } else {
-      newUsers = {
+    let cur = getCalendar(calendarName, profile.id);
+    console.log(cur);
+    if (cur !== null) {
+      newCal = {
         id: cur.id,
         name: calendarName,
-        user1: profile.id,
-        user2: await getUserByUserName(firstUser),
-        user3: await getUserByUserName(secondUser),
+        owner: profile.id,
       };
-      await updateCalendar(newUsers);
+    } else {
+      newCal = {
+        name: calendarName,
+        owner: profile.id,
+      };
     }
+    await updateCalendar(newCal);
+    const newC = await getCalendar(calendarName, profile.id);
+    const updatedUser = {
+      cal_id: newC,
+      owner_id: profile.id,
+    };
+    await updateUser(updatedUser);
     window.location.replace('/');
   };
 
   return (
-    <form className="create-calender-form" onSubmit={handleSubmit}>
-      Name your calender!
+    <>
+      <select onChange={(e) => setSelected(e.target.value)}>
+        <option defaultValue={null}>pick to edit</option>
+        {calendars.map((cal) => (
+          <option key={cal.id} value={cal.id}>
+            {cal.name}
+          </option>
+        ))}
+      </select>
+      <form className="create-calender-form" onSubmit={handleSubmit}>
+        Name Calendar
+        <input
+          value={calendarName}
+          placeholder="Calendar Name"
+          type="text"
+          onChange={(e) => {
+            setCalendarName(e.target.value);
+          }}
+        ></input>
+        <button>Submit</button>
+      </form>
       <input
+        placeholder="Users Name"
         type="text"
         onChange={(e) => {
-          setCalendarName(e.target.value);
+          setNewUser(e.target.value);
         }}
       ></input>
-      First User
-      <input
-        type="text"
-        onChange={(e) => {
-          setFirstUser(e.target.value);
-        }}
-      ></input>
-      Second User
-      <input
-        type="text"
-        onChange={(e) => {
-          setSecondUser(e.target.value);
-        }}
-      ></input>
-      <button>Make Calendar</button>
-    </form>
+      <button onClick={handleAdd}>Add User</button>
+    </>
   );
 }
