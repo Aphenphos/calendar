@@ -12,7 +12,6 @@ export function useMonth(year, month) {
         arr.push(' ');
       }
       const numOfDays = getDaysInMonth(year, month);
-      console.log(numOfDays, first);
 
       for (let i = 1; i <= numOfDays + 1; i++) {
         arr.push(i);
