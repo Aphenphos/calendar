@@ -37,6 +37,7 @@ export default function CreateCalendar() {
       };
       await updateCalendar(newUsers);
     }
+    window.location.replace('/');
   };
 
   return (
