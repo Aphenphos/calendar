@@ -53,7 +53,7 @@ export default function CreateCalendar() {
     await updateCalendar(newCal);
     const newC = await getCalendar(calendarName, profile.id);
     const updatedUser = {
-      cal_id: newC,
+      cal_id: newC.id,
       owner_id: profile.id,
     };
     await updateUser(updatedUser);
