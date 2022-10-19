@@ -76,4 +76,13 @@ function monthNumToName(mm) {
   }
   return month;
 }
-export { getDaysInMonth, getFirstDayOfMonth, dayOfWeek, monthNumToName };
+
+async function parseDates(arr) {
+  const date = {
+    month: arr[0] - 1,
+    day: arr[1],
+    year: arr[2],
+  };
+  return date;
+}
+export { getDaysInMonth, getFirstDayOfMonth, dayOfWeek, monthNumToName, parseDates };

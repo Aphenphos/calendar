@@ -42,7 +42,9 @@ export default function Event() {
           <DatePicker onChange={onChanges} value={selectedDate} type="text" />
 
           <select onChange={(e) => setSelected(e.target.value)}>
-            <option defaultValue={null}>pick to edit</option>
+            <option selected disabled hidden>
+              Pick to add event.
+            </option>
             {calendars.map((cal) => (
               <option key={cal.calId} value={cal.calId}>
                 {cal.calName}

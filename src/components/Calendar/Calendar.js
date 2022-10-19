@@ -5,15 +5,20 @@ import { useMonth } from '../../hooks/useMonth';
 import Day from '../Day/Day';
 import './Calendar.sass';
 import { useCalendars } from '../../hooks/useCalendars';
+import { useEvents } from '../../hooks/useEvents';
 
 export default function Calender() {
   const curYear = new Date().getFullYear();
   const [year, setYear] = useState(curYear);
   const [month, setMonth] = useState(new Date().getMonth());
   const { user } = useContext(UserContext);
-  const { days } = useMonth(year, month);
   const { calendars } = useCalendars();
-  const [setSelected] = useState();
+  const [selected, setSelected] = useState(null);
+  const { days, setDays } = useMonth(year, month, selected);
+  const { events } = useEvents(selected);
+  if (!events[0] && !days[0]) {
+    return <p>loading</p>;
+  }
 
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
@@ -55,8 +60,8 @@ export default function Calender() {
         <div>Thursday</div>
         <div>Friday</div>
         <div>Saturday</div>
-        {days.map((day, index) => (
-          <Day key={index} day={day} />
+        {days.map((d, index) => (
+          <Day key={index} day={d.day} desc={d.event} />
         ))}
       </div>
     </>
