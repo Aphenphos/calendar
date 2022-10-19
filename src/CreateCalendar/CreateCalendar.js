@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
 import { useOwned } from '../hooks/useOwned';
@@ -18,13 +18,12 @@ export default function CreateCalendar() {
   const [calendarName, setCalendarName] = useState('');
   const [newUser, setNewUser] = useState('');
   const { user } = useContext(UserContext);
-  const { calendars, setCalendars } = useOwned();
+  const { calendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
-  console.log(users);
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
-  //add users to an existing calendar
+
   const handleAdd = async () => {
     const usersId = await getUserByUserName(newUser);
     let user = {
