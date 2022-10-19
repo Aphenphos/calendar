@@ -14,7 +14,7 @@ export default function Calender() {
   const { user } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
-  const { days, setDays } = useMonth(year, month, selected);
+  const { days } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
