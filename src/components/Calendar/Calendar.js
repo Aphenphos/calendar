@@ -28,13 +28,13 @@ export default function Calender() {
         ))}
       </select>
       <div id="month-container">
-        <div>Sunday</div>
-        <div>Monday</div>
-        <div>Tuesday</div>
-        <div>Wednesday</div>
-        <div>Thursday</div>
-        <div>Friday</div>
-        <div>Saturday</div>
+        <div className='days'>Sunday</div>
+        <div className='days'>Monday</div>
+        <div className='days'>Tuesday</div>
+        <div className='days'>Wednesday</div>
+        <div className='days'>Thursday</div>
+        <div className='days'>Friday</div>
+        <div className='days'>Saturday</div>
         {days.map((day, index) => (
           <Day key={index} day={day} />
         ))}
