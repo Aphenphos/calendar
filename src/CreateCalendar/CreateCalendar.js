@@ -5,6 +5,7 @@ import { useOwned } from '../hooks/useOwned';
 import { useUsers } from '../hooks/useUsers';
 import { getProfileData } from '../services/auth';
 import {
+  deleteCalendar,
   getCalendarByName,
   getUserByUserName,
   removeUser,
@@ -17,7 +18,7 @@ export default function CreateCalendar() {
   const [calendarName, setCalendarName] = useState('');
   const [newUser, setNewUser] = useState('');
   const { user } = useContext(UserContext);
-  const { calendars } = useOwned();
+  const { calendars, setCalendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
   console.log(users);
   if (!user) {
@@ -77,19 +78,34 @@ export default function CreateCalendar() {
       setUsers([]);
     }
     setUsers(...users);
-    console.log(users);
+  };
+
+  const deleteCal = async () => {
+    if (confirm('Are you sure you want to delete this calendar?') === true) {
+      await deleteCalendar(selected);
+      window.location.replace('/');
+    } else {
+      return;
+    }
   };
 
   return (
     <>
-      <select onChange={(e) => setSelected(e.target.value)}>
-        <option defaultValue={null}>pick to edit</option>
-        {calendars.map((cal) => (
-          <option key={cal.id} value={cal.id}>
-            {cal.name}
-          </option>
-        ))}
-      </select>
+      {calendars && (
+        <>
+          <select onChange={(e) => setSelected(e.target.value)}>
+            <option defaultValue={null}>pick to edit</option>
+            {calendars.map((cal) => (
+              <option key={cal.id} value={cal.id}>
+                {cal.name}
+              </option>
+            ))}
+          </select>
+          <button value={selected} onClick={(e) => deleteCal(e.target.value)}>
+            Delete Calendar
+          </button>
+        </>
+      )}
 
       <form className="create-calender-form" onSubmit={handleSubmit}>
         Name Calendar

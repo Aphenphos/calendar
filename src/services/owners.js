@@ -89,3 +89,10 @@ export async function removeUser(id, calId) {
     .single();
   return response.data;
 }
+
+export async function deleteCalendar(calId) {
+  const events = await client.from('calendar-events').delete().eq('calendar', calId);
+  const owners = await client.from('owners').delete().eq('cal_id', calId);
+  const cal = await client.from('calendars').delete().eq('id', calId);
+  return events.data, owners.data, cal.data;
+}
