@@ -26,8 +26,6 @@ export function useMonth(year, month, calId) {
           event: curEvents,
         });
       }
-      console.log(arr);
-      console.log(events);
       setDays(arr);
     };
     renderCalendar();
