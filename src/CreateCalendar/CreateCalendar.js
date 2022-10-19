@@ -12,6 +12,7 @@ import {
   updateCalendar,
   updateUser,
 } from '../services/owners';
+import './CreateCalendar.css';
 
 export default function CreateCalendar() {
   const [selected, setSelected] = useState('');
@@ -91,55 +92,57 @@ export default function CreateCalendar() {
 
   return (
     <>
-      {calendars && (
-        <>
-          <select onChange={(e) => setSelected(e.target.value)}>
-            <option defaultValue={null}>pick to edit</option>
-            {calendars.map((cal) => (
-              <option key={cal.id} value={cal.id}>
-                {cal.name}
-              </option>
-            ))}
-          </select>
-          <button value={selected} onClick={(e) => deleteCal(e.target.value)}>
+      <div className='create-calendar-page'>
+        {calendars && (
+          <>
+            <select onChange={(e) => setSelected(e.target.value)}>
+              <option defaultValue={null}>pick to edit</option>
+              {calendars.map((cal) => (
+                <option key={cal.id} value={cal.id}>
+                  {cal.name}
+                </option>
+              ))}
+            </select>
+            <button value={selected} onClick={(e) => deleteCal(e.target.value)}>
             Delete Calendar
-          </button>
-        </>
-      )}
+            </button>
+          </>
+        )}
 
-      <form className="create-calender-form" onSubmit={handleSubmit}>
+        <form className="create-calender-form" onSubmit={handleSubmit}>
         Name Calendar
+          <input
+            value={calendarName}
+            placeholder="Calendar Name"
+            type="text"
+            onChange={(e) => {
+              setCalendarName(e.target.value);
+            }}
+          ></input>
+          <button>Submit</button>
+        </form>
+
         <input
-          value={calendarName}
-          placeholder="Calendar Name"
+          placeholder="Users Name"
           type="text"
           onChange={(e) => {
-            setCalendarName(e.target.value);
+            setNewUser(e.target.value);
           }}
         ></input>
-        <button>Submit</button>
-      </form>
-
-      <input
-        placeholder="Users Name"
-        type="text"
-        onChange={(e) => {
-          setNewUser(e.target.value);
-        }}
-      ></input>
-      <button onClick={handleAdd}>Add User</button>
-      {users && (
-        <div id="users">
-          {users.map((u, index) => (
-            <div key={u.owner_id}>
-              <h3>{u.prof_name}</h3>
-              <button value={u.owner_id} onClick={(e) => removeU(e.target.value, index)}>
+        <button onClick={handleAdd}>Add User</button>
+        {users && (
+          <div id="users">
+            {users.map((u, index) => (
+              <div key={u.owner_id}>
+                <h3>{u.prof_name}</h3>
+                <button value={u.owner_id} onClick={(e) => removeU(e.target.value, index)}>
                 Remove User
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }

@@ -11,3 +11,9 @@
     position: fixed;
     bottom: 0;
 }
+
+.theme-button {
+    position: absolute;
+    right: 0;
+    padding: 5;
+}
