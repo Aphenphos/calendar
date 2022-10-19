@@ -18,7 +18,6 @@ export function useUsers(calId) {
             prof_name: data[i].user_profiles.profile_name,
           });
           setUsers(arr);
-          console.log(arr);
         }
       }
     }

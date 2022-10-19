@@ -29,7 +29,6 @@ export async function getCalendarById(id) {
 export async function getOwnedCalendars() {
   const profile = await getProfileData();
   const resp = await client.from('calendars').select('*').eq('owner', profile.id);
-  console.log(resp.data);
   return resp.data;
 }
 

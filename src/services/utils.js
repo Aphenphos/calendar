@@ -31,6 +31,7 @@ function dayOfWeek(dayInt) {
       day = 'Saturday';
       break;
   }
+  return day;
 }
 
 export { getDaysInMonth, getFirstDayOfMonth, dayOfWeek };
