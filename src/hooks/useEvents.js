@@ -11,11 +11,12 @@ export function useEvents(calId) {
       for (let i = 0; i < data.length; i++) {
         const parsed = await parseDates(data[i].date);
         arr.push({
+          id: data[i].id,
           description: data[i].description,
           date: parsed,
         });
       }
-
+      console.log(arr);
       setEvents(arr);
     };
     fetchData();

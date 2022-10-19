@@ -7,12 +7,15 @@ import Calendar from './components/Calendar/Calendar';
 import Profile from './components/Profile/Profiles';
 import CreateCalendar from './CreateCalendar/CreateCalendar';
 import Event from './components/Event/Event';
+import { useContext } from 'react';
+import { ThemeContext } from './context/useTheme';
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
+  const [{ theme }] = useContext(ThemeContext);
 
+  return (
+    <div className="App" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+      <Header />
       <Switch>
         <Route path="/auth/:type" component={Auth} />
         <Route path="/create-calendar" component={CreateCalendar}></Route>
@@ -20,7 +23,6 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/" component={Calendar} />
       </Switch>
-
       <Footer />
     </div>
   );

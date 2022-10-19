@@ -37,7 +37,7 @@ export default function Event() {
 
   return (
     <>
-      <div>
+      <div className="event-page">
         <form onSubmit={addDates}>
           <DatePicker onChange={onChanges} value={selectedDate} type="text" />
 

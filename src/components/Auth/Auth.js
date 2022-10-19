@@ -46,7 +46,7 @@ export default function Auth() {
           />
         </label>
         <span>
-          need an account? <Link to="/auth/sign-up">Sign up!</Link>
+          Need an account? <Link to="/auth/sign-up">Sign up!</Link>
         </span>
         <button className="submit-button" onClick={submitAuth}>
           Submit
