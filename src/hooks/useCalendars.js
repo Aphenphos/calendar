@@ -17,7 +17,6 @@ export function useCalendars() {
           calOwner: data[i].calendars.owner,
         });
       }
-      console.log(arr);
       setCalendars(arr);
     };
     fetchData();

@@ -63,7 +63,7 @@ export async function getUserByUserName(username) {
   return response.data.id;
 }
 
-export async function getUsers() {
+export async function getUsers(calId) {
   const response = await client
     .from('owners')
     .select(
@@ -76,7 +76,16 @@ export async function getUsers() {
   )
   `
     )
-    .eq('cal_id', 33);
-  console.log(response.data);
+    .eq('cal_id', calId);
+  return response.data;
+}
+
+export async function removeUser(id, calId) {
+  const response = await client
+    .from('owners')
+    .delete()
+    .eq('cal_id', calId)
+    .eq('owner_id', id)
+    .single();
   return response.data;
 }

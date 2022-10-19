@@ -7,6 +7,7 @@ import { getProfileData } from '../services/auth';
 import {
   getCalendarByName,
   getUserByUserName,
+  removeUser,
   updateCalendar,
   updateUser,
 } from '../services/owners';
@@ -17,20 +18,29 @@ export default function CreateCalendar() {
   const [newUser, setNewUser] = useState('');
   const { user } = useContext(UserContext);
   const { calendars } = useOwned();
-  const { users } = useUsers();
+  const { users, setUsers } = useUsers(selected);
   console.log(users);
-
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
   //add users to an existing calendar
   const handleAdd = async () => {
     const usersId = await getUserByUserName(newUser);
-    const user = {
+    let user = {
       owner_id: usersId,
       cal_id: selected,
     };
-    updateUser(user);
+    await updateUser(user);
+    user = {
+      prof_name: newUser,
+      owner_id: usersId,
+      cal_id: selected,
+    };
+    if (users === undefined || null) {
+      setUsers([user]);
+    } else {
+      setUsers([user, ...users]);
+    }
   };
   //for submitting a NEW calendar
   const handleSubmit = async (e) => {
@@ -58,6 +68,16 @@ export default function CreateCalendar() {
     };
     await updateUser(updatedUser);
     window.location.replace('/');
+  };
+
+  const removeU = async (e, index) => {
+    await removeUser(e, selected);
+    users.splice(index, 1);
+    if (users === undefined || null) {
+      setUsers([]);
+    }
+    setUsers(...users);
+    console.log(users);
   };
 
   return (
@@ -92,8 +112,18 @@ export default function CreateCalendar() {
         }}
       ></input>
       <button onClick={handleAdd}>Add User</button>
-
-      <div id="users"></div>
+      {users && (
+        <div id="users">
+          {users.map((u, index) => (
+            <div key={u.owner_id}>
+              <h3>{u.prof_name}</h3>
+              <button value={u.owner_id} onClick={(e) => removeU(e.target.value, index)}>
+                Remove User
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
