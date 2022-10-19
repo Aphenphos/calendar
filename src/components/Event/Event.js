@@ -12,8 +12,6 @@ export default function Event() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState();
-  
-  
 
   const selectedDateOption = new Date(selectedDate);
   const formattedDate = `${
@@ -23,12 +21,6 @@ export default function Event() {
   const dateArr = formattedDate.split('/');
 
   const numberDate = dateArr.map(Number);
-
- 
-
- 
- 
-
 
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
@@ -42,11 +34,10 @@ export default function Event() {
     e.preventDefault();
     await addDate({ date: numberDate, calendar: selected, description: desc });
   };
- 
+
   return (
     <>
       <div>
-          
         <form onSubmit={addDates}>
           <DatePicker onChange={onChanges} value={selectedDate} type="text" />
 

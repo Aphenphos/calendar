@@ -7,27 +7,46 @@ import './Calendar.sass';
 import { useCalendars } from '../../hooks/useCalendars';
 
 export default function Calender() {
-  const [year] = useState(2022);
-  const [month] = useState(11);
+  const curYear = new Date().getFullYear();
+  const [year, setYear] = useState(curYear);
+  const [month, setMonth] = useState(new Date().getMonth());
   const { user } = useContext(UserContext);
   const { days } = useMonth(year, month);
   const { calendars } = useCalendars();
   const [setSelected] = useState();
+
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
 
- 
   return (
     <>
       <select onChange={(e) => setSelected(e.target.value)}>
-        <option defaultValue={null}>pick to edit</option>
+        <option defaultValue={null}>Pick your Calendar</option>
         {calendars.map((cal) => (
           <option key={cal.calId} value={cal.calId}>
             {cal.calName}
           </option>
         ))}
       </select>
+      <select onChange={(e) => setMonth(e.target.value)}>
+        <option selected disabled hidden>
+          Months...
+        </option>
+        <option value={0}>January</option>
+        <option value={1}>February</option>
+        <option value={2}>March</option>
+        <option value={3}>April</option>
+        <option value={4}>May</option>
+        <option value={5}>June</option>
+        <option value={6}>July</option>
+        <option value={7}>August</option>
+        <option value={8}>September</option>
+        <option value={9}>October</option>
+        <option value={10}>November</option>
+        <option value={11}>December</option>
+      </select>
+      <input type="number" onChange={(e) => setYear(e.target.value)}></input>
       <div id="month-container">
         <div>Sunday</div>
         <div>Monday</div>
