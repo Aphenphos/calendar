@@ -13,6 +13,7 @@ export default function Event() {
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState();
   
+  
 
   const selectedDateOption = new Date(selectedDate);
   const formattedDate = `${
@@ -20,10 +21,13 @@ export default function Event() {
   }/${selectedDateOption.getDate()}/${selectedDateOption.getFullYear()}`;
 
   const dateArr = formattedDate.split('/');
-  console.log(dateArr);
 
+  const numberDate = dateArr.map(Number);
 
+ 
 
+ 
+ 
 
 
   if (!user) {
@@ -36,8 +40,7 @@ export default function Event() {
 
   const addDates = async (e) => {
     e.preventDefault();
-    await addDate({ date: dateArr, calendar: selected, description: desc });
-    console.log('asdsad', dateArr, selected);
+    await addDate({ date: numberDate, calendar: selected, description: desc });
   };
  
   return (
@@ -50,8 +53,8 @@ export default function Event() {
           <select onChange={(e) => setSelected(e.target.value)}>
             <option defaultValue={null}>pick to edit</option>
             {calendars.map((cal) => (
-              <option key={cal.id} value={cal.id}>
-                {cal.name}
+              <option key={cal.calId} value={cal.calId}>
+                {cal.calName}
               </option>
             ))}
           </select>

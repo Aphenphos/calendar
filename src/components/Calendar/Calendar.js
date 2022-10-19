@@ -7,16 +7,17 @@ import './Calendar.sass';
 import { useCalendars } from '../../hooks/useCalendars';
 
 export default function Calender() {
-  const [year, setYear] = useState(2022);
-  const [month, setMonth] = useState(11);
+  const [year] = useState(2022);
+  const [month] = useState(11);
   const { user } = useContext(UserContext);
-  const { days, setDays } = useMonth(year, month);
+  const { days } = useMonth(year, month);
   const { calendars } = useCalendars();
-  const [selected, setSelected] = useState();
+  const [setSelected] = useState();
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
 
+ 
   return (
     <>
       <select onChange={(e) => setSelected(e.target.value)}>
