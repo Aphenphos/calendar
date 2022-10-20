@@ -46,7 +46,7 @@ export default function Event() {
       });
     } else {
       await addDate({ date: numberDate, calendar: selected, description: desc });
-      setMess(`Event Added ${desc}`);
+      setMess(`Event Added`);
       window.alert(`${mess}`);
     }
   };

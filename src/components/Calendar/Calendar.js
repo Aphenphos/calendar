@@ -33,7 +33,7 @@ export default function Calender() {
           </option>
         ))}
       </select>
-      <select onChange={(e) => setMonth(e.target.value)}>
+      <select defaultValue={month} onChange={(e) => setMonth(e.target.value)}>
         <option selected disabled hidden>
           Months...
         </option>
@@ -50,7 +50,7 @@ export default function Calender() {
         <option value={10}>November</option>
         <option value={11}>December</option>
       </select>
-      <input type="number" onChange={(e) => setYear(e.target.value)}></input>
+      <input defaultValue={year} type="number" onChange={(e) => setYear(e.target.value)}></input>
       <div id="month-container">
         <div className="days">Sunday</div>
         <div className="days">Monday</div>
