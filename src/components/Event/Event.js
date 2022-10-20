@@ -12,7 +12,6 @@ export default function Event() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
-  const [mess, setMess] = useState('Event added');
   const [recur, setRecur] = useState(false);
 
   const selectedDateOption = new Date(selectedDate);
@@ -35,19 +34,18 @@ export default function Event() {
   const addDates = async (e) => {
     e.preventDefault();
     if (selected === null) {
-      setMess('Please Select a Calendar');
-      window.alert(`${mess}`);
-    }
-    if (recur === true) {
-      await addDate({
-        date: [numberDate[0], numberDate[1], null],
-        calendar: selected,
-        description: desc,
-      });
+      window.alert(`Please Select a calendar`);
     } else {
-      await addDate({ date: numberDate, calendar: selected, description: desc });
-      setMess(`Event Added ${desc}`);
-      window.alert(`${mess}`);
+      if (recur === true) {
+        await addDate({
+          date: [numberDate[0], numberDate[1], null],
+          calendar: selected,
+          description: desc,
+        });
+      } else {
+        await addDate({ date: numberDate, calendar: selected, description: desc });
+        window.alert(`Event added`);
+      }
     }
   };
 
