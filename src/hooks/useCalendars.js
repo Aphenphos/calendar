@@ -3,8 +3,10 @@ import { getAccess } from '../services/owners';
 
 export function useCalendars() {
   const [calendars, setCalendars] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const data = await getAccess();
       let arr = [];
       for (let i = 0; i < data.length; i++) {
@@ -20,6 +22,7 @@ export function useCalendars() {
       setCalendars(arr);
     };
     fetchData();
+    setLoading(false);
   }, []);
-  return { calendars, setCalendars };
+  return { calendars, setCalendars, loading, setLoading };
 }

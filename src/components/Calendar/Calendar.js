@@ -14,7 +14,7 @@ export default function Calender() {
   const { user } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
-  const { days } = useMonth(year, month, selected);
+  const { days, loading } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
@@ -22,6 +22,10 @@ export default function Calender() {
 
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
+  }
+
+  if (loading) {
+    return <p>loading</p>;
   }
   return (
     <>

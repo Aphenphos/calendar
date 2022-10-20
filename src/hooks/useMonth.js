@@ -5,8 +5,10 @@ import { useEvents } from './useEvents';
 
 export function useMonth(year, month, calId) {
   const [days, setDays] = useState([]);
+  const [loading, setLoading] = useState([]);
   const { events } = useEvents(calId);
   useEffect(() => {
+    setLoading(true);
     setDays([]);
     const renderCalendar = async () => {
       const first = getFirstDayOfMonth(year, month);
@@ -34,6 +36,7 @@ export function useMonth(year, month, calId) {
       setDays(arr);
     };
     renderCalendar();
+    setLoading(false);
   }, [year, month, events]);
-  return { days, setDays };
+  return { days, setDays, loading, setLoading };
 }

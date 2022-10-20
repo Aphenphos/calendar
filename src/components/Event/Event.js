@@ -10,7 +10,7 @@ export default function Event() {
   const { user } = useContext(UserContext);
   const [desc, setDisc] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { calendars } = useCalendars();
+  const { calendars, loading, setLoading } = useCalendars();
   const [selected, setSelected] = useState(null);
   const [recur, setRecur] = useState(false);
 
@@ -33,7 +33,9 @@ export default function Event() {
 
   const addDates = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (selected === null) {
+      setLoading(false);
       window.alert(`Please Select a calendar`);
     } else {
       if (recur === true) {
@@ -42,8 +44,10 @@ export default function Event() {
           calendar: selected,
           description: desc,
         });
+        setLoading(false);
       } else {
         await addDate({ date: numberDate, calendar: selected, description: desc });
+        setLoading(false);
         window.alert(`Event added`);
       }
     }
@@ -56,6 +60,10 @@ export default function Event() {
       setRecur(false);
     }
   };
+
+  if (loading) {
+    return <p>loading</p>;
+  }
 
   return (
     <>
