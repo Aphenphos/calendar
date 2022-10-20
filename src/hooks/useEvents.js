@@ -16,7 +16,6 @@ export function useEvents(calId) {
           date: parsed,
         });
       }
-      console.log(arr);
       setEvents(arr);
     };
     fetchData();
