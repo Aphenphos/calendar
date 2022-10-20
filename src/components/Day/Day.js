@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { deleteEvent } from '../../services/events';
 import './Day.sass';
 
-export default function Day({ day, desc }) {
+export default function Day({ day, event }) {
   const [active, setActive] = useState(null);
   if (day === ' ') {
     return <button className="hidden-button"></button>;
@@ -16,13 +16,13 @@ export default function Day({ day, desc }) {
     <>
       <div>
         {day}
-        {desc.map((event, index) => (
+        {event.map((eve, index) => (
           <>
             <div key={index} className={active ? 'hidden' : ''}>
-              <p>{event.description}</p>
+              <p>{eve.description}</p>
               <button
                 id={index}
-                value={event.id}
+                value={eve.id}
                 onClick={(e) => {
                   removeEvent(e.target.value);
                 }}

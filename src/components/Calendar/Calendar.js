@@ -61,7 +61,7 @@ export default function Calender() {
         <div className="days">Friday</div>
         <div className="days">Saturday</div>
         {days.map((d, index) => (
-          <Day key={index} day={d.day} desc={d.event} />
+          <Day key={index} day={d.day} event={d.event} />
         ))}
       </div>
     </>
