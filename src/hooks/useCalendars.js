@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAccess, getCalendarById } from '../services/owners';
+import { getAccess } from '../services/owners';
 
 export function useCalendars() {
   const [calendars, setCalendars] = useState([]);

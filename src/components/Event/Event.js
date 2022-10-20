@@ -12,8 +12,7 @@ export default function Event() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState();
-  
-  
+  const [recur, setRecur] = useState(false);
 
   const selectedDateOption = new Date(selectedDate);
   const formattedDate = `${
@@ -23,12 +22,6 @@ export default function Event() {
   const dateArr = formattedDate.split('/');
 
   const numberDate = dateArr.map(Number);
-
- 
-
- 
- 
-
 
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
@@ -40,18 +33,35 @@ export default function Event() {
 
   const addDates = async (e) => {
     e.preventDefault();
-    await addDate({ date: numberDate, calendar: selected, description: desc });
+    if (recur === true) {
+      await addDate({
+        date: [null, null, null],
+        calendar: selected,
+        description: desc,
+      });
+    } else {
+      await addDate({ date: numberDate, calendar: selected, description: desc });
+    }
   };
- 
+
+  const setRecurring = (e) => {
+    if (e.target.checked) {
+      setRecur(true);
+    } else {
+      setRecur(false);
+    }
+  };
+
   return (
     <>
-      <div>
-          
+      <div className="event-page">
         <form onSubmit={addDates}>
-          <DatePicker onChange={onChanges} value={selectedDate} type="text" />
-
+          {!recur && <DatePicker onChange={onChanges} value={selectedDate} type="text" />}
+          <input type="checkbox" onChange={setRecurring}></input>
           <select onChange={(e) => setSelected(e.target.value)}>
-            <option defaultValue={null}>pick to edit</option>
+            <option selected disabled hidden>
+              Pick to add event.
+            </option>
             {calendars.map((cal) => (
               <option key={cal.calId} value={cal.calId}>
                 {cal.calName}

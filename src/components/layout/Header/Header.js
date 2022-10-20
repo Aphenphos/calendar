@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { signOut } from '../../../services/auth';
 import { UserContext } from '../../../context/useUser';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import { useCalendars } from '../../../hooks/useCalendars';
 
 export default function Header() {
   const { user, setUser, setProfile } = useContext(UserContext);
-  const { calendars } = useCalendars();
 
   const handleSignOut = async () => {
     await signOut();
