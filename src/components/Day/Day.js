@@ -14,20 +14,21 @@ export default function Day({ day, event }) {
   };
   return (
     <>
-      <div>
+      <div className='day-container'>
         {day}
         {event.map((eve, index) => (
           <>
-            <div key={index} className={active ? 'hidden' : ''}>
+            <div key={index} className={active ? 'hidden' : 'event-info'}>
               <p>{eve.description}</p>
               <button
+                className='delete-button'
                 id={index}
                 value={eve.id}
                 onClick={(e) => {
                   removeEvent(e.target.value);
                 }}
               >
-                -
+               -
               </button>
             </div>
           </>
