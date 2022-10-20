@@ -1,7 +1,19 @@
 .event-page {
-    height: 80vh;
+  height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.display {
+  top: 50vh;
+  left: 50vh;
+  display: block;
+  z-index: 100000;
+  position: absolute;
 }
