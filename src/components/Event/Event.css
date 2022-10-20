@@ -1,3 +1,15 @@
 .event-page {
-    height: 80vh;
+  height: 80vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.display {
+  top: 50vh;
+  left: 50vh;
+  display: block;
+  z-index: 100000;
+  position: absolute;
 }
