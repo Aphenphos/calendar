@@ -25,7 +25,7 @@ export default function Calender() {
   }
   return (
     <>
-      <select onChange={(e) => setSelected(e.target.value)}>
+      <select className="calendar-selector" onChange={(e) => setSelected(e.target.value)}>
         <option defaultValue={null}>Pick your Calendar</option>
         {calendars.map((cal) => (
           <option key={cal.calId} value={cal.calId}>
@@ -33,7 +33,11 @@ export default function Calender() {
           </option>
         ))}
       </select>
-      <select defaultValue={month} onChange={(e) => setMonth(e.target.value)}>
+      <select
+        defaultValue={month}
+        className="months-option"
+        onChange={(e) => setMonth(e.target.value)}
+      >
         <option selected disabled hidden>
           Months...
         </option>

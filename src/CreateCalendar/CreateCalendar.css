@@ -1,3 +1,26 @@
 .create-calendar-page {
     height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
 }
+
+.input-form-create{
+    margin: 10px;
+}
+
+.create-calender-form {
+    background-color: rgba(255,255,255,0.13);
+    border: 2px solid black;
+    box-shadow: 0 0 25px rgb(41, 41, 96);
+    height: 20vh;
+    width: 40vw;
+    position: absolute;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+align-items: center;
+}
+

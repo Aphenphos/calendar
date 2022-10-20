@@ -1,13 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../context/useUser';
-import { useOwned } from '../hooks/useOwned';
 import { useUsers } from '../hooks/useUsers';
 import { getProfileData } from '../services/auth';
 import {
-  deleteCalendar,
   getCalendarByName,
-  getUserByUserName,
   removeUser,
   updateCalendar,
   updateUser,
@@ -15,35 +12,33 @@ import {
 import './CreateCalendar.css';
 
 export default function CreateCalendar() {
-  const [selected, setSelected] = useState('');
+  const [selected] = useState('');
   const [calendarName, setCalendarName] = useState('');
-  const [newUser, setNewUser] = useState('');
   const { user } = useContext(UserContext);
-  const { calendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
 
-  const handleAdd = async () => {
-    const usersId = await getUserByUserName(newUser);
-    let user = {
-      owner_id: usersId,
-      cal_id: selected,
-    };
-    await updateUser(user);
-    user = {
-      prof_name: newUser,
-      owner_id: usersId,
-      cal_id: selected,
-    };
-    if (users === undefined || null) {
-      setUsers([user]);
-    } else {
-      setUsers([user, ...users]);
-    }
-  };
-  //for submitting a NEW calendar
+  // const handleAdd = async () => {
+  //   const usersId = await getUserByUserName(newUser);
+  //   let user = {
+  //     owner_id: usersId,
+  //     cal_id: selected,
+  //   };
+  //   await updateUser(user);
+  //   user = {
+  //     prof_name: newUser,
+  //     owner_id: usersId,
+  //     cal_id: selected,
+  //   };
+  //   if (users === undefined || null) {
+  //     setUsers([user]);
+  //   } else {
+  //     setUsers([user, ...users]);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let newCal = {};
@@ -68,7 +63,7 @@ export default function CreateCalendar() {
       owner_id: profile.id,
     };
     await updateUser(updatedUser);
-    window.location.replace('/');
+    window.location.replace('/edit-calendar');
   };
 
   const removeU = async (e, index) => {
@@ -80,37 +75,24 @@ export default function CreateCalendar() {
     setUsers(...users);
   };
 
-  const deleteCal = async () => {
-    if (confirm('Are you sure you want to delete this calendar?') === true) {
-      await deleteCalendar(selected);
-      window.location.replace('/');
-    } else {
-      return;
-    }
-  };
+  // const deleteCal = async () => {
+  //   if (confirm('Are you sure you want to delete this calendar?') === true) {
+  //     await deleteCalendar(selected);
+  //     window.location.replace('/');
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   return (
     <>
       <div className='create-calendar-page'>
-        {calendars && (
-          <>
-            <select onChange={(e) => setSelected(e.target.value)}>
-              <option defaultValue={null}>pick to edit</option>
-              {calendars.map((cal) => (
-                <option key={cal.id} value={cal.id}>
-                  {cal.name}
-                </option>
-              ))}
-            </select>
-            <button value={selected} onClick={(e) => deleteCal(e.target.value)}>
-            Delete Calendar
-            </button>
-          </>
-        )}
+     
 
         <form className="create-calender-form" onSubmit={handleSubmit}>
-        Name Calendar
+        Make a New Calendar!
           <input
+            className='input-form-create'
             value={calendarName}
             placeholder="Calendar Name"
             type="text"
@@ -118,17 +100,9 @@ export default function CreateCalendar() {
               setCalendarName(e.target.value);
             }}
           ></input>
-          <button>Submit</button>
+          <button>Make Calendar</button>
         </form>
-
-        <input
-          placeholder="Users Name"
-          type="text"
-          onChange={(e) => {
-            setNewUser(e.target.value);
-          }}
-        ></input>
-        <button onClick={handleAdd}>Add User</button>
+      
         {users && (
           <div id="users">
             {users.map((u, index) => (
