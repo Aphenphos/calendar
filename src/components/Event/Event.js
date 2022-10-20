@@ -63,7 +63,12 @@ export default function Event() {
     <>
       <div className="event-page">
         <form onSubmit={addDates}>
-          <DatePicker onChange={onChanges} value={selectedDate} type="text" />
+          <DatePicker
+            onChange={onChanges}
+            value={selectedDate}
+            type="text"
+            style={{ color: 'white' }}
+          />
           <input type="checkbox" onChange={setRecurring}></input>
           <select onChange={(e) => setSelected(e.target.value)}>
             <option selected disabled hidden>
