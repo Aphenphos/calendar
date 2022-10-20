@@ -23,7 +23,6 @@ export default function Calender() {
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
-
   return (
     <>
       <select onChange={(e) => setSelected(e.target.value)}>
