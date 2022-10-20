@@ -18,6 +18,9 @@ export function useMonth(year, month, calId) {
 
       for (let i = 1; i <= numOfDays + 1; i++) {
         const curEvents = events.filter((e) => {
+          if (e.date.year === null) {
+            return e.date.day === i && e.date.month === parseInt(month);
+          }
           return (
             e.date.day === i && e.date.month === parseInt(month) && e.date.year === parseInt(year)
           );

@@ -35,7 +35,7 @@ export default function Event() {
     e.preventDefault();
     if (recur === true) {
       await addDate({
-        date: [null, null, null],
+        date: [numberDate[0], numberDate[1], null],
         calendar: selected,
         description: desc,
       });
@@ -56,7 +56,7 @@ export default function Event() {
     <>
       <div className="event-page">
         <form onSubmit={addDates}>
-          {!recur && <DatePicker onChange={onChanges} value={selectedDate} type="text" />}
+          <DatePicker onChange={onChanges} value={selectedDate} type="text" />
           <input type="checkbox" onChange={setRecurring}></input>
           <select onChange={(e) => setSelected(e.target.value)}>
             <option selected disabled hidden>
