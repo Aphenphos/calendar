@@ -40,7 +40,7 @@ export default function Profile() {
     <>
       <div className='profile-page'>
         <h2>Profile Page</h2>
-        <h3>{profile.profile_name}</h3>
+        <h3>UserName: {profile.profile_name}</h3>
         <form onSubmit={updateProf}>
           <input
             type="text"
@@ -49,7 +49,8 @@ export default function Profile() {
               setUserName(e.target.value);
             }}
           />
-          <button> Submit </button>
+          <br></br>
+          <button className='submit-button'> Submit </button>
         </form>
       </div>
     </>

@@ -46,7 +46,7 @@ export default function Event() {
       });
     } else {
       await addDate({ date: numberDate, calendar: selected, description: desc });
-      setMess(`Event Added`);
+      setMess(`Event Added ${desc}`);
       window.alert(`${mess}`);
     }
   };
@@ -62,14 +62,9 @@ export default function Event() {
   return (
     <>
       <div className="event-page">
-        <form onSubmit={addDates}>
-          <DatePicker
-            onChange={onChanges}
-            value={selectedDate}
-            type="text"
-            style={{ color: 'white' }}
-          />
-          <input type="checkbox" onChange={setRecurring}></input>
+        <form onSubmit={addDates} className="input-form">
+          <DatePicker onChange={onChanges} value={selectedDate} type="text" />
+          Yearly? <input type="checkbox" onChange={setRecurring}></input>
           <select onChange={(e) => setSelected(e.target.value)}>
             <option selected disabled hidden>
               Pick to add event.

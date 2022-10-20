@@ -1,3 +1,12 @@
 .profile-page {
     height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+    
+}
+
+.submit-button {
+    margin: 20px;
 }
