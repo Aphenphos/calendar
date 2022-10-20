@@ -23,7 +23,7 @@ export default function Header() {
         <Link className="profile-link" to="/create-event">
           Events
         </Link>
-        <Link className="profile-link" to="/create-calendar">
+        <Link className="profile-link" to="/choose-calendar">
           Customize and Create
         </Link>
         <Link className="profile-link" to="/profile">

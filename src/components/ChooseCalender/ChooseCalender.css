@@ -1,0 +1,22 @@
+.container-choose {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.pick-button {
+    margin: 30px;
+    height: 75px;
+    width: 150px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-decoration: none;
+}
+
+.pick-button:hover {
+      color: #000000;
+    background:rgb(206, 206, 206);
+}

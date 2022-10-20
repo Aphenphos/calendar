@@ -9,6 +9,9 @@ import CreateCalendar from './CreateCalendar/CreateCalendar';
 import Event from './components/Event/Event';
 import { useContext } from 'react';
 import { ThemeContext } from './context/useTheme';
+import ChooseCalender from './components/ChooseCalender/ChooseCalender';
+import EditCal from './components/EditCal/EditCal';
+
 
 function App() {
   const [{ theme }] = useContext(ThemeContext);
@@ -17,8 +20,10 @@ function App() {
     <div className="App" style={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
       <Header />
       <Switch>
+        <Route path="/choose-calendar" component={ChooseCalender}></Route>
         <Route path="/auth/:type" component={Auth} />
-        <Route path="/create-calendar" component={CreateCalendar}></Route>
+        <Route path="/create-calendar" component={CreateCalendar} />
+        <Route path="/edit-calendar" component={EditCal}/>
         <Route path="/create-event" component={Event}></Route>
         <Route path="/profile" component={Profile} />
         <Route path="/" component={Calendar} />
