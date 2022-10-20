@@ -4,22 +4,21 @@ import { UserContext } from '../../context/useUser';
 import { useOwned } from '../../hooks/useOwned';
 import { useUsers } from '../../hooks/useUsers';
 
-import {
-  deleteCalendar,
-  getUserByUserName,
-  removeUser,
-  updateUser, } from '../../services/owners';
+import { deleteCalendar, getUserByUserName, removeUser, updateUser } from '../../services/owners';
 import './EditCal.css';
 
 export default function EditCal() {
   const [selected, setSelected] = useState('');
- 
+
   const [newUser, setNewUser] = useState('');
-  const { user } = useContext(UserContext);
+  const { user, profile } = useContext(UserContext);
   const { calendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
+  }
+  if (profile === null) {
+    return <Redirect to="/profile"></Redirect>;
   }
 
   const handleAdd = async () => {
@@ -40,33 +39,33 @@ export default function EditCal() {
       setUsers([user, ...users]);
     }
   };
-    //for submitting a NEW calendar
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     let newCal = {};
-//     const profile = await getProfileData();
-//     let cur = await getCalendarByName(calendarName, profile.id);
-//     if (cur !== null) {
-//       newCal = {
-//         id: cur.id,
-//         name: calendarName,
-//         owner: profile.id,
-//       };
-//     } else {
-//       newCal = {
-//         name: calendarName,
-//         owner: profile.id,
-//       };
-//     }
-//     await updateCalendar(newCal);
-//     const newC = await getCalendarByName(calendarName, profile.id);
-//     const updatedUser = {
-//       cal_id: newC.id,
-//       owner_id: profile.id,
-//     };
-//     await updateUser(updatedUser);
-//     window.location.replace('/');
-//   };
+  //for submitting a NEW calendar
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     let newCal = {};
+  //     const profile = await getProfileData();
+  //     let cur = await getCalendarByName(calendarName, profile.id);
+  //     if (cur !== null) {
+  //       newCal = {
+  //         id: cur.id,
+  //         name: calendarName,
+  //         owner: profile.id,
+  //       };
+  //     } else {
+  //       newCal = {
+  //         name: calendarName,
+  //         owner: profile.id,
+  //       };
+  //     }
+  //     await updateCalendar(newCal);
+  //     const newC = await getCalendarByName(calendarName, profile.id);
+  //     const updatedUser = {
+  //       cal_id: newC.id,
+  //       owner_id: profile.id,
+  //     };
+  //     await updateUser(updatedUser);
+  //     window.location.replace('/');
+  //   };
 
   const removeU = async (e, index) => {
     await removeUser(e, selected);
@@ -88,8 +87,8 @@ export default function EditCal() {
 
   return (
     <>
-      <div className='create-calendar-page'>
-        <div className='form-input'>
+      <div className="create-calendar-page">
+        <div className="form-input">
           {calendars && (
             <>
               <select onChange={(e) => setSelected(e.target.value)}>
@@ -101,12 +100,11 @@ export default function EditCal() {
                 ))}
               </select>
               <button value={selected} onClick={(e) => deleteCal(e.target.value)}>
-                            Delete Calendar
+                Delete Calendar
               </button>
             </>
           )}
 
-     
           <input
             placeholder="Users Name"
             type="text"
@@ -121,7 +119,7 @@ export default function EditCal() {
                 <div key={u.owner_id}>
                   <h3>{u.prof_name}</h3>
                   <button value={u.owner_id} onClick={(e) => removeU(e.target.value, index)}>
-                                    Remove User
+                    Remove User
                   </button>
                 </div>
               ))}

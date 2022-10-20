@@ -11,17 +11,22 @@ export default function Calender() {
   const curYear = new Date().getFullYear();
   const [year, setYear] = useState(curYear);
   const [month, setMonth] = useState(new Date().getMonth());
-  const { user } = useContext(UserContext);
+  const { user, profile } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
   const { days, loading } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
+  console.log(profile);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
   }
 
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
+  }
+
+  if (profile === null) {
+    return <Redirect to="/profile"></Redirect>;
   }
 
   if (loading) {

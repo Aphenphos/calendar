@@ -25,12 +25,8 @@ export default function Profile() {
       user_id: user.id,
     };
 
-    const resp = await updateProfile(profileInput);
-    if (resp === null) {
-      window.alert('Username taken, names must be unique');
-    } else {
-      window.location.href = '/';
-    }
+    await updateProfile(profileInput);
+    window.location.href = '/';
   };
 
   if (!user) {
