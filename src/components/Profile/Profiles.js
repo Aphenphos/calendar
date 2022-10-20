@@ -8,8 +8,7 @@ export default function Profile() {
   const [profile, setProfile] = useState([]);
   const [userName, setUserName] = useState(profile.profile_name);
   const { user } = useContext(UserContext);
-  
-  
+
   useEffect(() => {
     async function fetchProfile() {
       const data = await getProfileData();
@@ -18,7 +17,6 @@ export default function Profile() {
     fetchProfile();
   }, []);
 
-  
   const updateProf = async (e) => {
     e.preventDefault();
     const profileInput = {
@@ -26,19 +24,22 @@ export default function Profile() {
       profile_name: userName,
       user_id: user.id,
     };
-    
-    
-    await updateProfile(profileInput);
-    window.location.href = '/';
+
+    const resp = await updateProfile(profileInput);
+    if (resp === null) {
+      window.alert('Username taken, names must be unique');
+    } else {
+      window.location.href = '/';
+    }
   };
-  
+
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
 
   return (
     <>
-      <div className='profile-page'>
+      <div className="profile-page">
         <h2>Profile Page</h2>
         <h3>UserName: {profile.profile_name}</h3>
         <form onSubmit={updateProf}>
@@ -50,7 +51,7 @@ export default function Profile() {
             }}
           />
           <br></br>
-          <button className='submit-button'> Submit </button>
+          <button className="submit-button"> Submit </button>
         </form>
       </div>
     </>
