@@ -16,7 +16,6 @@ export default function Calender() {
   const [selected, setSelected] = useState(null);
   const { days, loading } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
-  console.log(profile);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
   }
