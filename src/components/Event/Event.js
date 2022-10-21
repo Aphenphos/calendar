@@ -7,7 +7,7 @@ import { addDate } from '../../services/events';
 import { useCalendars } from '../../hooks/useCalendars';
 
 export default function Event() {
-  const { user, profile } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [desc, setDisc] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { calendars, loading, setLoading } = useCalendars();
