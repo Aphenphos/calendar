@@ -24,7 +24,7 @@ export default function Calender() {
     return <Redirect to="/auth/sign-in" />;
   }
 
-  if (profile === null) {
+  if (profile === undefined || null) {
     return <Redirect to="/profile"></Redirect>;
   }
 

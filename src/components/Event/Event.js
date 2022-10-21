@@ -26,7 +26,7 @@ export default function Event() {
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
-  if (profile === null) {
+  if (profile === undefined || null) {
     return <Redirect to="/profile"></Redirect>;
   }
 
