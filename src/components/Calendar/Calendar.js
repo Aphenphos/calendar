@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../context/useUser';
 import { Redirect } from 'react-router-dom';
 import { useMonth } from '../../hooks/useMonth';
@@ -6,16 +6,25 @@ import Day from '../Day/Day';
 import './Calendar.sass';
 import { useCalendars } from '../../hooks/useCalendars';
 import { useEvents } from '../../hooks/useEvents';
+import { getProfileData } from '../../services/auth';
 
 export default function Calender() {
   const curYear = new Date().getFullYear();
   const [year, setYear] = useState(curYear);
+  const [profile, setProfile] = useState([]);
   const [month, setMonth] = useState(new Date().getMonth());
-  const { user, profile, loading } = useContext(UserContext);
+  const { user, loading } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
   const { days } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
+  useEffect(() => {
+    async function fetchProfile() {
+      const data = await getProfileData();
+      setProfile(data);
+    }
+    fetchProfile();
+  }, []);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
   }
@@ -27,7 +36,6 @@ export default function Calender() {
   if (loading) {
     return <p>loading</p>;
   }
-
   if (!profile) {
     return <Redirect to="/profile"></Redirect>;
   }
