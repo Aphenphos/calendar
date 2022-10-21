@@ -11,14 +11,11 @@ export default function EditCal() {
   const [selected, setSelected] = useState('');
 
   const [newUser, setNewUser] = useState('');
-  const { user, profile } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const { calendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
-  }
-  if (profile === null) {
-    return <Redirect to="/profile"></Redirect>;
   }
 
   const handleAdd = async () => {
