@@ -11,10 +11,10 @@ export default function Calender() {
   const curYear = new Date().getFullYear();
   const [year, setYear] = useState(curYear);
   const [month, setMonth] = useState(new Date().getMonth());
-  const { user } = useContext(UserContext);
+  const { user, profile, loading } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
-  const { days, loading } = useMonth(year, month, selected);
+  const { days } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
@@ -28,6 +28,9 @@ export default function Calender() {
     return <p>loading</p>;
   }
 
+  if (!profile) {
+    return <Redirect to="/profile"></Redirect>;
+  }
   return (
     <>
       <select className="calendar-selector" onChange={(e) => setSelected(e.target.value)}>
