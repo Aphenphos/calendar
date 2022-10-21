@@ -11,10 +11,10 @@ export default function Calender() {
   const curYear = new Date().getFullYear();
   const [year, setYear] = useState(curYear);
   const [month, setMonth] = useState(new Date().getMonth());
-  const { user, profile } = useContext(UserContext);
+  const { user, profile, uloading } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
-  const { days, loading } = useMonth(year, month, selected);
+  const { days } = useMonth(year, month, selected);
   const { events } = useEvents(selected);
   if (!events[0] && !days[0]) {
     return <p>loading</p>;
@@ -24,12 +24,13 @@ export default function Calender() {
     return <Redirect to="/auth/sign-in" />;
   }
 
-  if (profile === undefined || null) {
-    return <Redirect to="/profile"></Redirect>;
-  }
-
-  if (loading) {
+  if (uloading) {
     return <p>loading</p>;
+  }
+  if (uloading === false) {
+    if (profile === undefined) {
+      return <Redirect to="/profile"></Redirect>;
+    }
   }
   return (
     <>
