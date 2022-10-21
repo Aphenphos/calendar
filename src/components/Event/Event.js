@@ -26,9 +26,6 @@ export default function Event() {
   if (!user) {
     return <Redirect to="/auth/sign-in"></Redirect>;
   }
-  if (profile === undefined || null) {
-    return <Redirect to="/profile"></Redirect>;
-  }
 
   const onChanges = (selectedDate) => {
     setSelectedDate(selectedDate);
