@@ -25,8 +25,13 @@ export default function Profile() {
       user_id: user.id,
     };
 
-    await updateProfile(profileInput);
-    window.location.href = '/';
+    const resp = await updateProfile(profileInput);
+    console.log(resp);
+    if (resp === null) {
+      window.alert('This username is taken');
+    } else {
+      window.location.href = '/';
+    }
   };
 
   if (!user) {
