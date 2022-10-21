@@ -26,7 +26,6 @@ export default function Profile() {
     };
 
     const resp = await updateProfile(profileInput);
-    console.log(resp);
     if (resp === null) {
       window.alert('This username is taken');
     } else {
