@@ -12,7 +12,7 @@ export default function Calender() {
   const curMonth = new Date().getMonth();
   const [year, setYear] = useState(curYear);
   const [month, setMonth] = useState(curMonth);
-  const { user, loading } = useContext(UserContext);
+  const { user, loading, profile } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
   const { days } = useMonth(year, month, selected);
@@ -21,12 +21,16 @@ export default function Calender() {
     return <p>loading</p>;
   }
 
+  if (loading) {
+    return <p>loading</p>;
+  }
+
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
-
-  if (loading) {
-    return <p>loading</p>;
+  console.log(profile);
+  if (profile === null) {
+    return <Redirect to="/profile" />;
   }
 
   return (

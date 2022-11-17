@@ -7,16 +7,19 @@ const UserProvider = ({ children }) => {
   const currentUser = getUser();
   const [user, setUser] = useState(currentUser);
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetch() {
-      let currentProfile = await getProfileData();
+      setLoading(true);
+      const currentProfile = await getProfileData();
       setProfile(currentProfile);
+      setLoading(false);
     }
     fetch();
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser, profile, setProfile }}>
+    <UserContext.Provider value={{ user, setUser, profile, setProfile, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   );
