@@ -2,8 +2,9 @@ function getFirstDayOfMonth(year, month) {
   return new Date(year, month, 1).getDay();
 }
 
-function getDaysInMonth(year, month) {
-  return new Date(year, month, 0).getDate();
+async function getDaysInMonth(year, month) {
+  const monthInt = parseInt(month) + 1;
+  return new Date(year, monthInt, 0).getDate();
 }
 
 function dayOfWeek(dayInt) {

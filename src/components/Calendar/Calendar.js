@@ -9,8 +9,9 @@ import { useEvents } from '../../hooks/useEvents';
 
 export default function Calender() {
   const curYear = new Date().getFullYear();
+  const curMonth = new Date().getMonth();
   const [year, setYear] = useState(curYear);
-  const [month, setMonth] = useState(new Date().getMonth());
+  const [month, setMonth] = useState(curMonth);
   const { user, loading } = useContext(UserContext);
   const { calendars } = useCalendars();
   const [selected, setSelected] = useState(null);
