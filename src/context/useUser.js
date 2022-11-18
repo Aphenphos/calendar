@@ -22,10 +22,10 @@ const UserProvider = ({ children }) => {
         return res(profileData);
       }).then((profileData) => {
         setProfile(profileData);
-        setLoading(false);
       });
     }
     fetch();
+    setLoading(false);
   }, []);
   return (
     <UserContext.Provider value={{ user, setUser, profile, setProfile, loading, setLoading }}>

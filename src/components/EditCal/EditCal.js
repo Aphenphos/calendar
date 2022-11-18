@@ -11,13 +11,20 @@ export default function EditCal() {
   const [selected, setSelected] = useState('');
 
   const [newUser, setNewUser] = useState('');
-  const { user } = useContext(UserContext);
+  const { user, loading, profile } = useContext(UserContext);
   const { calendars } = useOwned();
   const { users, setUsers } = useUsers(selected);
-  if (!user) {
-    return <Redirect to="/auth/sign-in"></Redirect>;
+  if (loading) {
+    return <p>loading</p>;
   }
 
+  if (!user) {
+    return <Redirect to="/auth/sign-in" />;
+  }
+
+  if (!profile) {
+    return <Redirect to="/profile" />;
+  }
   const handleAdd = async () => {
     const usersId = await getUserByUserName(newUser);
     let user = {
@@ -36,33 +43,7 @@ export default function EditCal() {
       setUsers([user, ...users]);
     }
   };
-  //for submitting a NEW calendar
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     let newCal = {};
-  //     const profile = await getProfileData();
-  //     let cur = await getCalendarByName(calendarName, profile.id);
-  //     if (cur !== null) {
-  //       newCal = {
-  //         id: cur.id,
-  //         name: calendarName,
-  //         owner: profile.id,
-  //       };
-  //     } else {
-  //       newCal = {
-  //         name: calendarName,
-  //         owner: profile.id,
-  //       };
-  //     }
-  //     await updateCalendar(newCal);
-  //     const newC = await getCalendarByName(calendarName, profile.id);
-  //     const updatedUser = {
-  //       cal_id: newC.id,
-  //       owner_id: profile.id,
-  //     };
-  //     await updateUser(updatedUser);
-  //     window.location.replace('/');
-  //   };
+
 
   const removeU = async (e, index) => {
     await removeUser(e, selected);

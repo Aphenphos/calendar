@@ -7,10 +7,10 @@ import { addDate } from '../../services/events';
 import { useCalendars } from '../../hooks/useCalendars';
 
 export default function Event() {
-  const { user } = useContext(UserContext);
+  const { user, loading, profile, setLoading } = useContext(UserContext);
   const [desc, setDisc] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { calendars, loading, setLoading } = useCalendars();
+  const { calendars, calLoading } = useCalendars();
   const [selected, setSelected] = useState(null);
   const [recur, setRecur] = useState(false);
 
@@ -23,8 +23,16 @@ export default function Event() {
 
   const numberDate = dateArr.map(Number);
 
+  if (loading || calLoading) {
+    return <p>loading</p>;
+  }
+
   if (!user) {
-    return <Redirect to="/auth/sign-in"></Redirect>;
+    return <Redirect to="/auth/sign-in" />;
+  }
+
+  if (!profile) {
+    return <Redirect to="/profile" />;
   }
 
   const onChanges = (selectedDate) => {

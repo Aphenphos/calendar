@@ -10,10 +10,18 @@ export default function CreateCalendar() {
   const [selected] = useState('');
   const [loading, setLoading] = useState(false);
   const [calendarName, setCalendarName] = useState('');
-  const { user } = useContext(UserContext);
+  const { user, profile } = useContext(UserContext);
   const { users, setUsers } = useUsers(selected);
+  if (loading) {
+    return <p>loading</p>;
+  }
+
   if (!user) {
-    return <Redirect to="/auth/sign-in"></Redirect>;
+    return <Redirect to="/auth/sign-in" />;
+  }
+
+  if (!profile) {
+    return <Redirect to="/profile" />;
   }
 
   const handleSubmit = async (e) => {

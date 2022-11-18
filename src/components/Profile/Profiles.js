@@ -9,6 +9,7 @@ export default function Profile() {
   const [userName, setUserName] = useState(profile.profile_name);
   const { user } = useContext(UserContext);
 
+
   useEffect(() => {
     async function fetchProfile() {
       const data = await getProfileData();
