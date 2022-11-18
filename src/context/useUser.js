@@ -22,8 +22,8 @@ const UserProvider = ({ children }) => {
         return res(profileData);
       }).then((profileData) => {
         setProfile(profileData);
+        setLoading(false);
       });
-      setLoading(false);
     }
     fetch();
   }, []);
