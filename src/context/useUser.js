@@ -13,7 +13,7 @@ const UserProvider = ({ children }) => {
     async function fetch() {
       setLoading(true);
       new Promise((res) => {
-        const timer = setTimeout((func) => {
+        const timer = setTimeout(function() {
           const profileData = null;
           return res(profileData);
         }, 3000);
