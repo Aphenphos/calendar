@@ -11,3 +11,4 @@ THINGS TO FIX IN ORDER
                 )
                         REMOVE the header from the homepage and make the home page a little more welcoming/inviting
                             make ERROR messages actually pop up (ex EMAIL IS TAKEN or EMAIL is invalid)
+                                after all is complete make a actual readable readme so people dont think we are dumb
