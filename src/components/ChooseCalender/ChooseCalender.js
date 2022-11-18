@@ -4,7 +4,7 @@ import { UserContext } from '../../context/useUser';
 import './ChooseCalender.css';
 
 export default function ChooseCalender() {
-  const { user, loading, profile, setLoading } = useContext(UserContext);
+  const { user, loading, profile } = useContext(UserContext);
   if (loading) {
     return <p>loading</p>;
   }
