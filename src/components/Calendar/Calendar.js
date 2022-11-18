@@ -29,7 +29,7 @@ export default function Calender() {
     return <Redirect to="/auth/sign-in" />;
   }
 
-  if (!profile.profile_name) {
+  if (!profile) {
     return <Redirect to="/profile" />;
   }
 

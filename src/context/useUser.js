@@ -12,8 +12,17 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     async function fetch() {
       setLoading(true);
-      const currentProfile = await getProfileData();
-      setProfile(currentProfile);
+      new Promise((res) => {
+        const timer = setTimeout((func) => {
+          const profileData = null;
+          return res(profileData);
+        }, 3000);
+        const profileData = getProfileData();
+        clearTimeout(timer);
+        return res(profileData);
+      }).then((profileData) => {
+        setProfile(profileData);
+      });
       setLoading(false);
     }
     fetch();
