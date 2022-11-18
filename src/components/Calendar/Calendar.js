@@ -28,8 +28,8 @@ export default function Calender() {
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
-  console.log(profile);
-  if (!profile) {
+
+  if (!profile.profile_name) {
     return <Redirect to="/profile" />;
   }
 
