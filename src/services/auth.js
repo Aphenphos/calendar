@@ -1,4 +1,4 @@
-import { client, checkError } from './client';
+import { client } from './client';
 
 export function getUser() {
   return client.auth.currentUser;
@@ -22,7 +22,6 @@ export async function signOut() {
 export async function getProfileData() {
   const user = await getUser();
   const response = await client.from('user_profiles').select('*').eq('user_id', user.id).single();
-  console.log(response.data);
   return response.data;
 }
 
