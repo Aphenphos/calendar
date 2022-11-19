@@ -1,30 +1,30 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { getProfileData, updateProfile } from '../../services/auth';
+import React, { useContext, useState } from 'react';
+import { updateProfile } from '../../services/auth';
 import { UserContext } from '../../context/useUser';
 import { Redirect } from 'react-router-dom';
 import './profiles.css';
 
 export default function Profile() {
-  const [profile, setProfile] = useState([]);
-  const [userName, setUserName] = useState(profile.profile_name);
-  const { user } = useContext(UserContext);
 
+  const { user, profile } = useContext(UserContext);
+  const [userName, setUserName] = useState('');
 
-  useEffect(() => {
-    async function fetchProfile() {
-      const data = await getProfileData();
-      setProfile(data);
-    }
-    fetchProfile();
-  }, []);
 
   const updateProf = async (e) => {
     e.preventDefault();
-    const profileInput = {
-      id: profile.id,
-      profile_name: userName,
-      user_id: user.id,
-    };
+    let profileInput = {};
+    if (profile) {
+      profileInput = {
+        id: profile.id,
+        profile_name: userName,
+        user_id: user.id,
+      };
+    } else {
+      profileInput = {
+        profile_name: userName,
+        user_id: user.id
+      };
+    }
 
     const resp = await updateProfile(profileInput);
     if (resp === null) {
@@ -42,7 +42,7 @@ export default function Profile() {
     <>
       <div className="profile-page">
         <h2>Profile Page</h2>
-        <h3>UserName: {profile.profile_name}</h3>
+        <h3>UserName: {profile ? profile.profile_name : ''}</h3>
         <form onSubmit={updateProf}>
           <input
             type="text"

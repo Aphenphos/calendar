@@ -22,8 +22,8 @@ export async function signOut() {
 export async function getProfileData() {
   const user = await getUser();
   const response = await client.from('user_profiles').select('*').eq('user_id', user.id).single();
-
-  return checkError(response);
+  console.log(response.data);
+  return response.data;
 }
 
 export async function updateProfile(profile) {

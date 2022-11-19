@@ -6,23 +6,13 @@ const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const currentUser = getUser();
   const [user, setUser] = useState(currentUser);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetch() {
       setLoading(true);
-      new Promise((res) => {
-        const timer = setTimeout(function() {
-          const profileData = null;
-          return res(profileData);
-        }, 3000);
-        const profileData = getProfileData();
-        clearTimeout(timer);
-        return res(profileData);
-      }).then((profileData) => {
-        setProfile(profileData);
-      });
+      const profileData = await getProfileData();
+      setProfile(profileData);
     }
     fetch();
     setLoading(false);
