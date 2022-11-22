@@ -23,7 +23,8 @@ export default function Auth() {
 
   return (
     <div className="container">
-      <form className="input-form">
+      <span>{type === 'sign-in' ? 'sign in' : 'sign-up'}</span>
+      <form className="input-form" onSubmit={submitAuth}>
         <label>
           Email:
           <input
@@ -46,9 +47,10 @@ export default function Auth() {
           />
         </label>
         <span>
-          Need an account? <Link to="/auth/sign-up">Sign up!</Link>
+          <Link to="/auth/sign-up">Sign up</Link>
+          <Link to="/auth/sign-in">Sign in</Link>
         </span>
-        <button className="submit-button" onClick={submitAuth}>
+        <button className="submit-button">
           Submit
         </button>
       </form>
