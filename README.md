@@ -1,7 +1,5 @@
 Basic Google Calendar style app.\
-
 Allows users to create an account.\
-
 Users may create many calendars.\
 Users may add events to their calendar that are either added individualy or marked to reoccur yearly(currently these are the only 2 options).\
 Users may mark one off events as complete making them dissapear.\
